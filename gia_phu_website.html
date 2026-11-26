@@ -101,12 +101,13 @@ footer{background:#071426;color:#c2cbd7;padding:28px 0;font-size:12px}.footer-ro
 <section class="contact" id="contact"><div class="wrap"><div class="section-head"><div class="eyebrow">Kết nối với chúng tôi</div><h2>Bắt đầu trao đổi công việc</h2><p>Gửi thông tin nhu cầu, GIA PHÚ sẽ liên hệ để trao đổi thêm. Vui lòng cập nhật thông tin liên hệ chính thức trước khi đưa website lên sử dụng.</p></div>
  <div class="contact-grid">
   <div class="contact-info"><div class="eyebrow">GIA PHÚ</div><h2>Chúng tôi sẵn sàng lắng nghe</h2><p>Liên hệ để được tư vấn về phạm vi đo đạc, khảo sát và phương án thực hiện.</p>
-   <div class="info-line"><strong>ĐIỆN THOẠI</strong>[Bổ sung số hotline]</div>
+   <div class="info-line"><strong>ĐIỆN THOẠI</strong><a href="tel:0948952239">0948 952 239</a></div>
+   <div class="info-line"><strong>ZALO / NHẮN TIN</strong><a href="https://zalo.me/0948952239" target="_blank" rel="noopener">Nhắn tin Zalo: 0948 952 239 ↗</a></div>
    <div class="info-line"><strong>EMAIL</strong>[Bổ sung email công ty]</div>
    <div class="info-line"><strong>ĐỊA CHỈ</strong>[Bổ sung địa chỉ công ty]</div>
    <div class="info-line"><strong>GIỜ LÀM VIỆC</strong>[Bổ sung thời gian làm việc]</div>
   </div>
-  <form onsubmit="event.preventDefault();alert('Cảm ơn bạn đã gửi thông tin. Đây là bản giao diện mẫu; cần kết nối hệ thống nhận dữ liệu để gửi yêu cầu về công ty.');">
+  <form id="consultForm">
    <label>Họ và tên<input required placeholder="Tên của bạn"></label>
    <label>Số điện thoại<input required type="tel" placeholder="Số điện thoại liên hệ"></label>
    <label class="full">Nhu cầu dịch vụ<select><option>Chọn dịch vụ quan tâm</option><option>Đo đạc địa chính</option><option>Đo hiện trạng</option><option>Đo vẽ bản đồ</option><option>Định vị công trình</option><option>Khảo sát địa hình</option><option>Tư vấn kỹ thuật</option></select></label>
@@ -116,5 +117,37 @@ footer{background:#071426;color:#c2cbd7;padding:28px 0;font-size:12px}.footer-ro
  </div>
 </div></section>
 </main>
+<div class="quick-contact" aria-label="Liên hệ nhanh">
+ <a href="tel:0948952239" title="Gọi GIA PHÚ">☎ Gọi tư vấn</a>
+ <a href="https://zalo.me/0948952239" target="_blank" rel="noopener" title="Nhắn Zalo">Zalo</a>
+</div>
+<style>
+.quick-contact{position:fixed;right:18px;bottom:20px;z-index:30;display:flex;flex-direction:column;gap:9px}
+.quick-contact a{background:#c9a45c;color:#0b1d35;padding:12px 17px;font-size:12px;font-weight:800;letter-spacing:.3px;box-shadow:0 5px 18px #07142633;border-radius:3px}
+.quick-contact a:last-child{background:#0879d1;color:white}
+.quick-contact a:hover{filter:brightness(1.08)}
+</style>
 <footer><div class="wrap footer-row"><div>© 2026 <strong class="gold">GIA PHÚ</strong> · ĐO ĐẠC & TRẮC ĐỊA</div><div>Chính xác trong từng phép đo · Vững chắc mọi công trình</div></div></footer>
+
+<script>
+document.getElementById('consultForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const name = form.querySelector('input[placeholder="Tên của bạn"]').value.trim();
+  const phone = form.querySelector('input[type="tel"]').value.trim();
+  const service = form.querySelector('select').value;
+  const message = form.querySelector('textarea').value.trim();
+  const content = [
+    'YEU CAU TU VAN GIA PHU',
+    'Ho ten: ' + name,
+    'So dien thoai: ' + phone,
+    'Dich vu: ' + service,
+    'Noi dung: ' + message
+  ].join('\n');
+  const smsUrl = 'sms:0948952239?body=' + encodeURIComponent(content);
+  alert('Đang mở ứng dụng tin nhắn để gửi yêu cầu đến GIA PHÚ. Nếu thiết bị không hỗ trợ, vui lòng bấm nút Zalo hoặc Gọi tư vấn.');
+  window.location.href = smsUrl;
+});
+</script>
+
 </body></html>
